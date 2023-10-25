@@ -10,5 +10,5 @@ class UserRepository(context: Context){
 
     fun addUser(user: UserEntity) = userDao.insert(user = user)
 
-    fun flowAllUser(): Flow<List<UserEntity>> = userDao.flowAll()
+    fun flowUserByEmail(email: String): Flow<UserEntity?> = userDao.findUserByEmail(email)
 }

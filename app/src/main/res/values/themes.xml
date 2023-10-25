@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.PetCare" parent="Theme.MaterialComponents.Light">
-
+        <item name="android:textColor">@color/standard_text_color</item>
     </style>
 
     <style name="editTextStyle">

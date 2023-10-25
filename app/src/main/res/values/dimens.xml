@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <dimen name="TextInputLayoutVerticalMargin">8dp</dimen>
+    <dimen name="TextInputLayoutHorizontalMargin">32dp</dimen>
+
+    <!--Text size -->
+    <dimen name="TittleTextSize">36dp</dimen>
+    <dimen name="SubTittleTextSize">24dp</dimen>
+    <dimen name="commonTextSize">16dp</dimen>
+</resources>

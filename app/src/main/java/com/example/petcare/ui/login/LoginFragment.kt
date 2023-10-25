@@ -1,15 +1,15 @@
 package com.example.petcare.ui.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.petcare.R
-import com.example.petcare.data.PetCareDatabase
 import com.example.petcare.databinding.FragmentLoginBinding
-import com.example.petcare.ui.MainActivity
 
 class LoginFragment : Fragment() {
 
@@ -17,24 +17,40 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
 
-    private lateinit var activity: MainActivity
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
+    ): View {
+        binding = FragmentLoginBinding.inflate(layoutInflater)
+        viewModel.initRepositories(requireContext())
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentLoginBinding.inflate(layoutInflater)
-        activity = requireActivity() as MainActivity
+        setListeners()
 
-        viewModel.initRepositories(requireContext())
+        with(binding) {
+            loginNewAccount.setOnClickListener {
+                findNavController().navigate(R.id.registerFragment)
+            }
 
-        viewModel.retrieveAllUserData()
+            loginAccessButton.setOnClickListener {
+                viewModel.tryLogin(
+                    email = loginEmailInput.text.toString(),
+                    password = loginPasswordInput.text.toString()
+                )
+            }
+        }
+
+    }
+
+    private fun setListeners() {
+        viewModel.loginInfo.observe(viewLifecycleOwner) {
+            if (it) Toast.makeText(requireContext(), "Entrou", Toast.LENGTH_LONG).show()
+            else Toast.makeText(requireContext(), "Falhou", Toast.LENGTH_LONG).show()
+        }
     }
 
 }

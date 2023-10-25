@@ -7,7 +7,7 @@ import com.example.petcare.util.AppConstants
 
 @Entity(tableName = AppConstants.USER_TABLE)
 data class UserEntity (
-    @PrimaryKey val uid: Int,
+    @PrimaryKey(autoGenerate = true) val uid: Int,
     @ColumnInfo(name = "email") val email: String,
     @ColumnInfo(name = "password") val password: String,
     @ColumnInfo(name = "username") val username: String?,

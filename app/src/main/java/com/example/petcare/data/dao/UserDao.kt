@@ -20,7 +20,7 @@ interface UserDao {
     fun delete(user: UserEntity)
 
     @Query("SELECT * FROM ${AppConstants.USER_TABLE} WHERE email = :email")
-    fun findUserByEmail(email: String): UserEntity?
+    fun findUserByEmail(email: String): Flow<UserEntity?>
 
     @Insert
     fun insert(user: UserEntity)
