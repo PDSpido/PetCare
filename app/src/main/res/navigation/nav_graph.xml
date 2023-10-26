@@ -18,5 +18,30 @@
         android:id="@+id/registerFragment"
         android:name="com.example.petcare.ui.register.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_donationListFragment"
+            app:destination="@id/donationListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.example.petcare.ui.createPost.CreatePostFragment"
+        android:label="CreatePostFragment" />
+    <fragment
+        android:id="@+id/donationListFragment"
+        android:name="com.example.petcare.ui.donation.DonationListFragment"
+        android:label="fragment_donation_list"
+        tools:layout="@layout/fragment_donation_list" >
+        <action
+            android:id="@+id/action_donationListFragment_to_createPostFragment"
+            app:destination="@id/createPostFragment" />
+        <action
+            android:id="@+id/action_donationListFragment_to_donationConfirmationFragment"
+            app:destination="@id/donationConfirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/donationConfirmationFragment"
+        android:name="com.example.petcare.ui.donation.DonationConfirmationFragment"
+        android:label="fragment_donation_confirmation"
+        tools:layout="@layout/fragment_donation_confirmation" />
 </navigation>

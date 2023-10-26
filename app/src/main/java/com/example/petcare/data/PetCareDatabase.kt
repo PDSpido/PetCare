@@ -6,17 +6,21 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.petcare.data.dao.PostDao
 import com.example.petcare.data.dao.UserDao
+import com.example.petcare.data.entity.PostEntity
 import com.example.petcare.data.entity.UserEntity
 import com.example.petcare.util.AppConstants
 
 @Database(
     entities = [
-        UserEntity::class],
+        UserEntity::class,
+        PostEntity::class],
     version = 1
 )
 abstract class PetCareDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun postDao(): PostDao
 
     companion object {
 

@@ -75,6 +75,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 
     // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")

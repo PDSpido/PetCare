@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/TextInputLayoutHorizontalMargin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="32dp"
+                android:text="Novo Post"
+                android:textSize="@dimen/TittleTextSize"
+                tools:ignore="SpUsage" />
+
+            <Spinner
+                android:id="@+id/create_post_type"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/StandardFieldInputHeight" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/create_post_tittle_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+                android:hint="Titulo">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_post_tittle_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/create_post_species_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+                android:hint="Espécie">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_post_species_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/create_post_race_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+                android:hint="Raça">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_post_race_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/create_post_age_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+                android:hint="Idade">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_post_age_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/create_post_sex_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+                android:hint="Sexo">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_post_sex_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/create_post_color_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+                android:hint="Cor">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_post_color_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/create_post_description_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+                android:hint="Descrição">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_post_description_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/create_post_amount_input_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+                android:hint="Quantia desejada">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/create_post_amount_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/create_post_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Postar" />
+        </LinearLayout>
+    </ScrollView>
+</layout>

@@ -1,43 +1,45 @@
 package com.example.petcare.ui.login
 
 import android.content.Context
-import android.util.Log
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.petcare.data.repository.UserRepository
+import com.example.petcare.util.AppConstants
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
 
-    private lateinit var userRepository : UserRepository
+    private lateinit var userRepository: UserRepository
+    private lateinit var sharedPreferences: SharedPreferences
 
     private val _loginInfo: MutableLiveData<Boolean> = MutableLiveData()
     val loginInfo: LiveData<Boolean> get() = _loginInfo
 
     fun initRepositories(context: Context) {
         userRepository = UserRepository(context)
+        sharedPreferences =
+            context.getSharedPreferences(AppConstants.APP_SHARED_PREFERENCES, Context.MODE_PRIVATE)
     }
 
     fun tryLogin(email: String, password: String) {
         viewModelScope.launch {
             userRepository.flowUserByEmail(email).onEach {
-                Log.i("pedro", "$it")
                 if (it != null) {
-                    if (it.password == password){
+                    if (it.password == password) {
                         _loginInfo.postValue(true)
-                        setLogin()
-                    }
-                    else  _loginInfo.postValue(false)
-                } else  _loginInfo.postValue(false)
+                        setLogin(it.uid)
+                    } else _loginInfo.postValue(false)
+                } else _loginInfo.postValue(false)
             }.collect()
         }
     }
 
-    private fun setLogin() {
-        //TODO
+    private fun setLogin(uid: Int) {
+        sharedPreferences.edit().putInt(AppConstants.LOGIN_SHARED_PREFERENCES, uid).apply()
     }
 }

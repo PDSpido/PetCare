@@ -1,5 +1,6 @@
 package com.example.petcare.ui.login
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.petcare.R
 import com.example.petcare.databinding.FragmentLoginBinding
+import com.example.petcare.util.AppConstants
 
 class LoginFragment : Fragment() {
 
@@ -28,6 +30,12 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (requireContext().getSharedPreferences(
+                AppConstants.APP_SHARED_PREFERENCES,
+                Context.MODE_PRIVATE
+            ).getInt(AppConstants.LOGIN_SHARED_PREFERENCES, 0) != 0
+        )  findNavController().navigate(R.id.donationListFragment)
 
         setListeners()
 
@@ -48,7 +56,7 @@ class LoginFragment : Fragment() {
 
     private fun setListeners() {
         viewModel.loginInfo.observe(viewLifecycleOwner) {
-            if (it) Toast.makeText(requireContext(), "Entrou", Toast.LENGTH_LONG).show()
+            if (it) findNavController().navigate(R.id.donationListFragment)
             else Toast.makeText(requireContext(), "Falhou", Toast.LENGTH_LONG).show()
         }
     }
