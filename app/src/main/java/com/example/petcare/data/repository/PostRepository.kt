@@ -13,4 +13,8 @@ class PostRepository(context: Context){
     fun addContribution(postId: Int, newValue: Float) = postDao.addContribution(postId, newValue)
 
     fun flowAll(): Flow<List<PostEntity>> = postDao.flowAll()
+
+    fun flowAllDonationPosts(): Flow<List<PostEntity>> = postDao.flowAllDonationPosts()
+    fun flowAllFeedPosts(): Flow<List<PostEntity>> = postDao.flowAllFeedPosts()
+
 }

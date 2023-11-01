@@ -17,4 +17,10 @@ interface PostDao {
 
     @Query("UPDATE ${AppConstants.POST_TABLE} SET valueDonated = :newValue + valueDonated WHERE postType = :postId")
     fun addContribution(postId: Int, newValue: Float)
+
+    @Query("SELECT * FROM ${AppConstants.POST_TABLE} WHERE postType = ${AppConstants.POST_TYPE_DONATION}")
+    fun flowAllDonationPosts(): Flow<List<PostEntity>>
+
+    @Query("SELECT * FROM ${AppConstants.POST_TABLE} WHERE postType = ${AppConstants.POST_TYPE_FEED}")
+    fun flowAllFeedPosts(): Flow<List<PostEntity>>
 }

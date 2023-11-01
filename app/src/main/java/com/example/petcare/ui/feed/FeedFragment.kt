@@ -1,27 +1,25 @@
-package com.example.petcare.ui.donation
+package com.example.petcare.ui.feed
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.example.petcare.R
-import com.example.petcare.databinding.FragmentDonationListBinding
-import com.example.petcare.util.AppConstants
+import com.example.petcare.databinding.FragmentFeedBinding
 
-class DonationListFragment : Fragment(), View.OnClickListener {
+class FeedFragment : Fragment(), View.OnClickListener {
 
-    private val viewModel: DonationViewModel by viewModels()
+    private val viewModel: FeedViewModel by viewModels()
 
-    private lateinit var binding: FragmentDonationListBinding
+    private lateinit var binding: FragmentFeedBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDonationListBinding.inflate(layoutInflater)
+        binding = FragmentFeedBinding.inflate(layoutInflater)
         viewModel.initRepositories(requireContext())
         return binding.root
     }
@@ -36,15 +34,13 @@ class DonationListFragment : Fragment(), View.OnClickListener {
 
     private fun setListeners() {
         viewModel.postListData.observe(viewLifecycleOwner) {
-            binding.donationListRecyclerView.adapter =
-                DonationListAdapter(it, this)
+            Log.i("pedro", "$it")
+            binding.feedPostRecyclerView.adapter =
+                FeedAdapter(it, this)
         }
     }
 
     override fun onClick(v: View) {
-        findNavController().navigate(R.id.donationConfirmationFragment, Bundle().apply {
-            putInt(AppConstants.POST_ID_TO_CONFIRMATION, v.tag as Int)
-        })
     }
 
 }

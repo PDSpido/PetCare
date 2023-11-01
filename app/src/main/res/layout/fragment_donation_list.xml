@@ -7,13 +7,6 @@
     tools:context=".ui.donation.DonationListFragment"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/donation_list_add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_gravity="end"
-        android:text="Nova Doação"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/donation_list_recycler_view"
         android:layout_width="match_parent"

@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.petcare.R
 import com.example.petcare.databinding.FragmentLoginBinding
+import com.example.petcare.ui.MainActivity
 import com.example.petcare.util.AppConstants
 
 class LoginFragment : Fragment() {
@@ -35,7 +36,8 @@ class LoginFragment : Fragment() {
                 AppConstants.APP_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE
             ).getInt(AppConstants.LOGIN_SHARED_PREFERENCES, 0) != 0
-        )  findNavController().navigate(R.id.donationListFragment)
+        ) goToMain()
+
 
         setListeners()
 
@@ -51,14 +53,19 @@ class LoginFragment : Fragment() {
                 )
             }
         }
-
     }
 
     private fun setListeners() {
         viewModel.loginInfo.observe(viewLifecycleOwner) {
-            if (it) findNavController().navigate(R.id.donationListFragment)
+
+            if (it) goToMain()
             else Toast.makeText(requireContext(), "Falhou", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun goToMain() {
+        (activity as MainActivity).setNaviBarToVisible()
+        findNavController().navigate(R.id.feedFragment)
     }
 
 }

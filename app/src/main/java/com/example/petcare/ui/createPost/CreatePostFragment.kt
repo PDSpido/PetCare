@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.petcare.R
 import com.example.petcare.data.entity.PostEntity
 import com.example.petcare.databinding.FragmentCreatePostBinding
@@ -31,12 +33,13 @@ class CreatePostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        configureSpinner()
         with(binding) {
             createPostButton.setOnClickListener {
                 viewModel.createPost(
                     PostEntity(
                         uid = 0,
-                        postType = 1,
+                        postType = getPostType(createPostType.selectedView as TextView),
                         picture = "https://plus.unsplash.com/premium_photo-1680700148924-4abdd12c89b5",
                         userId = requireContext().getSharedPreferences(
                             AppConstants.APP_SHARED_PREFERENCES,
@@ -49,9 +52,26 @@ class CreatePostFragment : Fragment() {
                     )
                 )
 
-                findNavController().navigate(R.id.donationListFragment)
+                Toast.makeText(requireContext(), "DOAÇÃO REALIZAD", Toast.LENGTH_LONG).show()
             }
         }
     }
 
+    private fun configureSpinner() {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.post_type,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.createPostType.adapter = adapter
+        }
+    }
+
+    private fun getPostType(v: TextView) : Int =
+        when(v.text) {
+            "Alert" -> 1
+            "Donation" -> 2
+            else ->  0
+        }
 }

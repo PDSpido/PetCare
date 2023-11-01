@@ -17,5 +17,8 @@ class AppConstants {
 
         //Parameter Passage
         const val POST_ID_TO_CONFIRMATION = "PostIdToConfirmation"
+
+        const val POST_TYPE_FEED = 1
+        const val POST_TYPE_DONATION = 2
     }
 }

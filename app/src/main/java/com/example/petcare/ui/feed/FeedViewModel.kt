@@ -1,4 +1,4 @@
-package com.example.petcare.ui.donation
+package com.example.petcare.ui.feed
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,13 +9,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.petcare.data.entity.PostEntity
 import com.example.petcare.data.repository.PostRepository
 import com.example.petcare.util.AppConstants
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-class DonationViewModel : ViewModel() {
+class FeedViewModel : ViewModel() {
+
     private lateinit var postRepository: PostRepository
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -30,15 +29,9 @@ class DonationViewModel : ViewModel() {
 
     fun getAllPosts() {
         viewModelScope.launch {
-            postRepository.flowAllDonationPosts().onEach {
+            postRepository.flowAllFeedPosts().onEach {
                 _postListData.postValue(it)
             }.collect()
-        }
-    }
-
-    fun addContribution(postId: Int, newValue: Float) {
-        CoroutineScope(Dispatchers.IO).launch {
-            postRepository.addContribution(postId, newValue)
         }
     }
 }

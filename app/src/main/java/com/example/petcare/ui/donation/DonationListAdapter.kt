@@ -1,6 +1,5 @@
 package com.example.petcare.ui.donation
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View.OnClickListener
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import com.example.petcare.data.entity.PostEntity
 import com.example.petcare.databinding.ItemLayoutDonationBinding
 
 class DonationListAdapter(
-    private val context: Context,
     private val renderList: List<PostEntity>,
     private val onClickListener: OnClickListener
 ) :
@@ -34,7 +32,7 @@ class DonationListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DonationItemViewHolder =
         DonationItemViewHolder(
             ItemLayoutDonationBinding.inflate(
-                LayoutInflater.from(context),
+                LayoutInflater.from(parent.context),
                 parent,
                 false
             )
