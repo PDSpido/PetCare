@@ -9,12 +9,15 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.petcare.databinding.FragmentFeedBinding
+import com.example.petcare.util.AppConstants
 
 class FeedFragment : Fragment(), View.OnClickListener {
 
     private val viewModel: FeedViewModel by viewModels()
 
     private lateinit var binding: FragmentFeedBinding
+
+    private var activeType = AppConstants.Companion.UserType.COMMON.ordinal
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,10 +33,19 @@ class FeedFragment : Fragment(), View.OnClickListener {
 
         setListeners()
 
-        viewModel.getAllPosts()
-
-        binding.tietFeedSearchBar.doOnTextChanged { text, _, _, _ ->
-            viewModel.getAllPostsFromText("%$text%")
+        viewModel.getAllPosts(activeType)
+        with(binding) {
+            tietFeedSearchBar.doOnTextChanged { text, _, _, _ ->
+                viewModel.getAllPostsFromText(activeType,"%$text%")
+            }
+            feedOngTabButton.setOnClickListener {
+                activeType = AppConstants.Companion.UserType.ONG.ordinal
+                viewModel.getAllPosts(activeType)
+            }
+            feedPopularTabButton.setOnClickListener {
+                activeType = AppConstants.Companion.UserType.COMMON.ordinal
+                viewModel.getAllPosts(activeType)
+            }
         }
     }
 

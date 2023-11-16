@@ -14,6 +14,8 @@ class AppConstants {
         //Shared Preferences
         const val APP_SHARED_PREFERENCES = "AppSharedPreferences"
         const val LOGIN_SHARED_PREFERENCES = "LoginSharedPreferences"
+        const val LOGIN_TYPE_SHARED_PREFERENCES = "LoginTypeSharedPreferences"
+
 
         //Parameter Passage
         const val POST_ID_TO_CONFIRMATION = "PostIdToConfirmation"

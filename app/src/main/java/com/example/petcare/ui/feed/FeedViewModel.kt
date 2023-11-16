@@ -27,18 +27,20 @@ class FeedViewModel : ViewModel() {
             context.getSharedPreferences(AppConstants.APP_SHARED_PREFERENCES, Context.MODE_PRIVATE)
     }
 
-    fun getAllPosts() {
+    fun getAllPosts(type: Int) {
         viewModelScope.launch {
-            postRepository.flowAllFeedPosts().onEach {
-                _postListData.postValue(it)
+            postRepository.flowAllFeedPosts().onEach { list ->
+                _postListData.postValue(list.filter { it.userType == type})
             }.collect()
+
+
         }
     }
 
-    fun getAllPostsFromText(text: String) {
+    fun getAllPostsFromText(type: Int, text: String) {
         viewModelScope.launch {
-            postRepository.flowAllFeedPostsByText(text).onEach {
-                _postListData.postValue(it)
+            postRepository.flowAllFeedPostsByText(text).onEach { list ->
+                _postListData.postValue(list.filter { it.userType == type})
             }.collect()
         }
     }

@@ -32,14 +32,16 @@ class LoginViewModel : ViewModel() {
                 if (it != null) {
                     if (it.password == password) {
                         _loginInfo.postValue(true)
-                        setLogin(it.uid)
+                        setLogin(it.uid, it.userType)
                     } else _loginInfo.postValue(false)
                 } else _loginInfo.postValue(false)
             }.collect()
         }
     }
 
-    private fun setLogin(uid: Int) {
+    private fun setLogin(uid: Int, userType: Int) {
         sharedPreferences.edit().putInt(AppConstants.LOGIN_SHARED_PREFERENCES, uid).apply()
+        sharedPreferences.edit().putInt(AppConstants.LOGIN_TYPE_SHARED_PREFERENCES, userType).apply()
+
     }
 }

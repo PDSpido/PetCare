@@ -45,6 +45,10 @@ class CreatePostFragment : Fragment() {
                             AppConstants.APP_SHARED_PREFERENCES,
                             Context.MODE_PRIVATE
                         ).getInt(AppConstants.LOGIN_SHARED_PREFERENCES, 0),
+                        userType = requireContext().getSharedPreferences(
+                            AppConstants.APP_SHARED_PREFERENCES,
+                            Context.MODE_PRIVATE
+                        ).getInt(AppConstants.LOGIN_TYPE_SHARED_PREFERENCES, 0),
                         description = createPostDescriptionInput.text.toString(),
                         tittle = createPostTittleInput.text.toString(),
                         valueDesired = createPostAmountInput.text.toString().toFloat(),
