@@ -1,10 +1,11 @@
 package com.example.petcare.ui.feed
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.petcare.databinding.FragmentFeedBinding
@@ -30,17 +31,21 @@ class FeedFragment : Fragment(), View.OnClickListener {
         setListeners()
 
         viewModel.getAllPosts()
+
+        binding.tietFeedSearchBar.doOnTextChanged { text, _, _, _ ->
+            viewModel.getAllPostsFromText("%$text%")
+        }
     }
 
     private fun setListeners() {
         viewModel.postListData.observe(viewLifecycleOwner) {
-            Log.i("pedro", "$it")
             binding.feedPostRecyclerView.adapter =
                 FeedAdapter(it, this)
         }
     }
 
     override fun onClick(v: View) {
+        Toast.makeText(requireContext(), "Post reportado", Toast.LENGTH_SHORT).show()
     }
 
 }

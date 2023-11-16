@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.petcare.R
 import com.example.petcare.data.entity.UserEntity
 import com.example.petcare.databinding.FragmentRegisterBinding
+import com.example.petcare.util.AppConstants
 import com.google.android.material.textfield.TextInputLayout
 
 class RegisterFragment : Fragment() {
@@ -30,8 +32,12 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initObservers()
 
         with(binding) {
+            swRegisterOng.setOnCheckedChangeListener { _, _ ->
+                registerDocumentInputLayout.hint = if (swRegisterOng.isChecked) "CNPJ" else "CPF"
+            }
             registerButton.setOnClickListener {
                 if (verifyFields()) {
                     viewModel.registerUser(
@@ -42,11 +48,27 @@ class RegisterFragment : Fragment() {
                             email = registerEmailInput.text.toString(),
                             contact = registerPhoneInput.text.toString(),
                             password = registerPasswordInput.text.toString(),
-                            userType = 1
+                            userType = if (swRegisterOng.isChecked) AppConstants.Companion.UserType.ONG.ordinal
+                            else AppConstants.Companion.UserType.COMMON.ordinal
                         )
                     )
-                    findNavController().navigate(R.id.loginFragment)
                 }
+            }
+        }
+    }
+
+    private fun initObservers() {
+        viewModel.registerInfo.observe(viewLifecycleOwner) {
+            when (it.ordinal) {
+                AppConstants.Companion.RegisterErrors.SUCCESS.ordinal ->
+                    findNavController().navigate(R.id.loginFragment)
+
+                AppConstants.Companion.RegisterErrors.ALREADY_EXIST.ordinal ->
+                    Toast.makeText(
+                        requireContext(),
+                        "Usuario com esse email ja existe",
+                        Toast.LENGTH_SHORT
+                    ).show()
             }
         }
     }

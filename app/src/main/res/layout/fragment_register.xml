@@ -15,6 +15,13 @@
         android:layout_marginVertical="32dp"
         tools:ignore="SpUsage" />
 
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sw_register_ong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="É uma ONG?"
+        android:paddingHorizontal="10dp"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/register_name_input_layout"
         android:layout_width="match_parent"

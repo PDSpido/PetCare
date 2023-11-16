@@ -15,4 +15,9 @@
         android:enabled="true"
         android:icon="@drawable/ic_donation"
         android:title="Donation"/>
+    <item
+        android:id="@+id/menu_my_account"
+        android:enabled="true"
+        android:icon="@drawable/ic_my_account"
+        android:title="My Account"/>
 </menu>

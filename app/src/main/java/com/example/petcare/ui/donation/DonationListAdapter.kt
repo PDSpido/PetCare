@@ -24,7 +24,7 @@ class DonationListAdapter(
                 donationItemValueDesired.text = "Desejado: ${item.valueDesired}"
                 Glide.with(binding.root).load(item.picture).into(binding.donationItemPicture)
                 donationItemButton.tag = item.uid
-                donationItemButton.setOnClickListener(onClickListener)
+                if (item.valueDonated < item.valueDesired) donationItemButton.setOnClickListener(onClickListener)
             }
         }
     }

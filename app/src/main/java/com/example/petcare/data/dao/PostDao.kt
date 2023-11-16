@@ -23,4 +23,10 @@ interface PostDao {
 
     @Query("SELECT * FROM ${AppConstants.POST_TABLE} WHERE postType = ${AppConstants.POST_TYPE_FEED}")
     fun flowAllFeedPosts(): Flow<List<PostEntity>>
+
+    @Query("SELECT * FROM ${AppConstants.POST_TABLE} WHERE postType = ${AppConstants.POST_TYPE_FEED} AND tittle LiKE :text OR description LIKE :text")
+    fun flowAllFeedPostsByText(text: String): Flow<List<PostEntity>>
+
+    @Query("SELECT * FROM ${AppConstants.POST_TABLE} WHERE postType = ${AppConstants.POST_TYPE_FEED} AND userId = :id")
+    fun flowPostsById(id: Int): Flow<List<PostEntity>>
 }

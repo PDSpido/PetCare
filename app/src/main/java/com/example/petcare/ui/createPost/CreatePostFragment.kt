@@ -52,7 +52,7 @@ class CreatePostFragment : Fragment() {
                     )
                 )
 
-                Toast.makeText(requireContext(), "DOAÇÃO REALIZAD", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "DOAÇÃO REALIZADA", Toast.LENGTH_LONG).show()
             }
         }
     }

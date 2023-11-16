@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -31,15 +32,30 @@ class DonationConfirmationFragment : Fragment() {
 
         with(binding) {
             donationConfirmationButton.setOnClickListener {
-
-                viewModel.addContribution(
-                    arguments?.getInt(AppConstants.POST_ID_TO_CONFIRMATION)!!,
-                    donationConfirmationTittleInput.text.toString().toFloat()
-                )
-
-                findNavController().navigate(R.id.donationListFragment)
+                if (donationConfirmationTittleInput.text.toString().isEmpty()) {
+                    showErrorToast()
+                } else {
+                    with(donationConfirmationTittleInput.text.toString().toFloat()) {
+                        if (this <= 0) {
+                            showErrorToast()
+                        } else {
+                            viewModel.addContribution(
+                                arguments?.getInt(AppConstants.POST_ID_TO_CONFIRMATION)!!,
+                                this
+                            )
+                            findNavController().navigate(R.id.donationListFragment)
+                        }
+                    }
+                }
             }
-            viewModel.getAllPosts()
         }
+    }
+
+    private fun showErrorToast() {
+        Toast.makeText(
+            requireContext(),
+            "Tentativa de fazer doação com valor invalido, doação rejeitada",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 }

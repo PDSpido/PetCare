@@ -17,4 +17,7 @@ interface UserDao {
 
     @Insert
     fun insert(user: UserEntity)
+
+    @Query("SELECT * FROM ${AppConstants.USER_TABLE} WHERE uid = :id")
+    fun findUserById(id: Int): Flow<UserEntity?>
 }

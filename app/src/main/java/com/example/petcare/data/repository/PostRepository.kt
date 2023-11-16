@@ -15,6 +15,11 @@ class PostRepository(context: Context){
     fun flowAll(): Flow<List<PostEntity>> = postDao.flowAll()
 
     fun flowAllDonationPosts(): Flow<List<PostEntity>> = postDao.flowAllDonationPosts()
+
     fun flowAllFeedPosts(): Flow<List<PostEntity>> = postDao.flowAllFeedPosts()
+
+    fun flowAllFeedPostsByText(text: String): Flow<List<PostEntity>> = postDao.flowAllFeedPostsByText(text)
+
+    fun flowPostsById(id: Int): Flow<List<PostEntity>> = postDao.flowPostsById(id)
 
 }

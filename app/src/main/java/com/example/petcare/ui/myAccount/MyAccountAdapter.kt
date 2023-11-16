@@ -1,18 +1,16 @@
-package com.example.petcare.ui.feed
+package com.example.petcare.ui.myAccount
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.petcare.data.entity.PostEntity
 import com.example.petcare.databinding.ItemLayoutPostBinding
 
-class FeedAdapter(
+class MyAccountAdapter(
     private val renderList: List<PostEntity>,
-    private val onClickListener: View.OnClickListener
 ) :
-    RecyclerView.Adapter<FeedAdapter.PostViewHolder>() {
+    RecyclerView.Adapter<MyAccountAdapter.PostViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder =
         PostViewHolder(
@@ -37,8 +35,6 @@ class FeedAdapter(
                 feedItemValueDonated.text = "Doado: ${post.valueDonated}"
                 feedItemValueDesired.text = "Desejado: ${post.valueDesired}"
                 Glide.with(binding.root).load(post.picture).into(binding.feedItemPicture)
-
-                feedItemReport.setOnClickListener(onClickListener)
             }
         }
     }

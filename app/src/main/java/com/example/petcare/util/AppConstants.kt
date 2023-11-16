@@ -18,7 +18,20 @@ class AppConstants {
         //Parameter Passage
         const val POST_ID_TO_CONFIRMATION = "PostIdToConfirmation"
 
+        //Post type
         const val POST_TYPE_FEED = 1
         const val POST_TYPE_DONATION = 2
+
+        enum class RegisterErrors {
+            ALREADY_EXIST, SUCCESS, UNKNOWN_FAILURE
+        }
+
+        enum class UserType {
+            COMMON, ONG
+        }
+
+        enum class ANIMAL_TYPE {
+            DOG, CAT, BIRD
+        }
     }
 }

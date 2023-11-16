@@ -43,6 +43,10 @@ class MainActivity : FragmentActivity() {
                     navigation.navigate(R.id.donationListFragment)
                     true
                 }
+                R.id.menu_my_account -> {
+                    navigation.navigate(R.id.myAccountFragment)
+                    true
+                }
 
                 else -> false
             }
