@@ -45,7 +45,7 @@ class CreatePostFragment : Fragment() {
                         PostEntity(
                             uid = 0,
                             postType = getPostType(createPostType.selectedView as TextView),
-                            picture = "https://plus.unsplash.com/premium_photo-1680700148924-4abdd12c89b5",
+                            picture = "https://www.mobly.com.br/blog/wp-content/uploads/2019/10/lar-pet-friendly-4.jpg",
                             userId = requireContext().getSharedPreferences(
                                 AppConstants.APP_SHARED_PREFERENCES,
                                 Context.MODE_PRIVATE

@@ -1,6 +1,5 @@
 package com.example.petcare.ui.donation
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View.OnClickListener
 import android.view.ViewGroup
@@ -26,8 +25,6 @@ class DonationListAdapter(
                 donationItemValueDesired.text = "Desejado: ${item.valueDesired}"
                 Glide.with(binding.root).load(item.picture).into(binding.donationItemPicture)
                 donationItemButton.tag = item.uid
-                Log.i("pedro", "adapter ${item.uid}")
-
 
                 if (item.valueDonated < item.valueDesired) donationItemButton.setOnClickListener(
                     onClickListener

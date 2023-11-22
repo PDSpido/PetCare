@@ -13,26 +13,30 @@
         android:layout_marginVertical="32dp"
         android:text="Contribuir"
         android:textSize="@dimen/TittleTextSize"
-        tools:ignore="SpUsage" />
+        tools:ignore="SpUsage"
+        android:textColor="@color/brown"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/donation_confirmation_tittle_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
-        android:hint="Valor da contribuição">
+        android:hint="Valor da contribuição"
+        style="@style/editTextLayoutStyle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/donation_confirmation_tittle_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="number" />
+            android:inputType="number"
+            style="@style/editTextStyle"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/donation_confirmation_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Doar" />
+        android:text="Doar"
+        style="@style/buttonStyle"/>
 
 </LinearLayout>

@@ -4,8 +4,7 @@
     <dimen name="TextInputLayoutVerticalMargin">8dp</dimen>
     <dimen name="TextInputLayoutHorizontalMargin">32dp</dimen>
 
-    <dimen name="StandardFieldInputHeight">33dp</dimen>
-    <dimen name="BigFieldInputHeight">66dp</dimen>
+    <dimen name="StandardFieldInputHeight">55dp</dimen>
 
     <!--Text size -->
     <dimen name="TittleTextSize">36dp</dimen>

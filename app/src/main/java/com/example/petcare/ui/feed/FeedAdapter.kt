@@ -34,8 +34,6 @@ class FeedAdapter(
             with(binding) {
                 feedItemTittle.text = post.tittle
                 feedItemDescription.text = post.description
-                feedItemValueDonated.visibility = View.GONE
-                feedItemValueDesired.visibility = View.GONE
                 Glide.with(binding.root).load(post.picture).into(binding.feedItemPicture)
 
                 feedItemReport.setOnClickListener(onClickListener)

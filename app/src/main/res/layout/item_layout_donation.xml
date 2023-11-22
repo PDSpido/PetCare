@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginHorizontal="@dimen/TextInputLayoutHorizontalMargin">
+    android:layout_marginHorizontal="@dimen/TextInputLayoutHorizontalMargin"
+    android:background="@drawable/background_edit_text"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/donation_item_picture"
@@ -40,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Doar"
+        style="@style/buttonStyle"
         android:layout_marginHorizontal="@dimen/TextInputLayoutHorizontalMargin"/>
 
 

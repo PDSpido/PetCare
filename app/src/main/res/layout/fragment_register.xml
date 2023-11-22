@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="@dimen/TextInputLayoutHorizontalMargin">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Cadastro"
         android:textSize="@dimen/TittleTextSize"
-        android:layout_marginVertical="32dp"
+        android:layout_margin="32dp"
+        android:textColor="@color/brown"
         tools:ignore="SpUsage" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -20,18 +20,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="É uma ONG?"
-        android:paddingHorizontal="10dp"/>
+        android:layout_marginStart="24dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/register_name_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+        style="@style/editTextLayoutStyle"
+        app:boxBackgroundMode="none"
         android:hint="Nome">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_name_input"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/editTextStyle"
             android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -39,14 +41,16 @@
         android:id="@+id/register_document_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+        style="@style/editTextLayoutStyle"
+        app:boxBackgroundMode="none"
         android:hint="CPF"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_document_input"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/editTextStyle"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,13 +58,15 @@
         android:id="@+id/register_email_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+        style="@style/editTextLayoutStyle"
+        app:boxBackgroundMode="none"
         android:hint="E-mail">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_email_input"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/editTextStyle"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,13 +74,15 @@
         android:id="@+id/register_phone_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+        style="@style/editTextLayoutStyle"
+        app:boxBackgroundMode="none"
         android:hint="Telefone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_phone_input"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/editTextStyle"
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,14 +90,16 @@
         android:id="@+id/register_password_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/TextInputLayoutVerticalMargin"
+        style="@style/editTextLayoutStyle"
+        app:boxBackgroundMode="none"
         android:hint="Senha"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_password_input"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/editTextStyle"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -97,11 +107,13 @@
         android:id="@+id/register_privacy_radio_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
         android:text="Concordo com os Termos, Condições &amp; Política de Privacidade"/>
 
     <Button
         android:id="@+id/register_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registrar"/>
+        android:text="Registrar"
+        style="@style/buttonStyle"/>
 </LinearLayout>

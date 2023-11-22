@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.myAccount.MyAccountFragment"
-    android:padding="@dimen/TextInputLayoutHorizontalMargin"
     android:orientation="vertical"
-    android:layout_marginTop="24dp">
+    android:layout_marginTop="24dp"
+    android:background="@color/grey">
 
     <TextView
         android:id="@+id/tv_exit_home"
@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:drawableEnd="@drawable/ic_exit"
         android:drawablePadding="10dp"
+        android:layout_margin="24dp"
         android:text="Exit"
         android:layout_gravity="end"/>
 
@@ -28,18 +29,21 @@
         android:id="@+id/tv_my_account_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/tv_my_account_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_my_account_post_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </LinearLayout>
