@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.petcare.R
 import com.example.petcare.databinding.FragmentMyAccountBinding
+import com.example.petcare.ui.MainActivity
 import com.example.petcare.util.AppConstants
 
 class MyAccountFragment : Fragment() {
@@ -37,12 +40,17 @@ class MyAccountFragment : Fragment() {
             requireContext().getSharedPreferences(
                 AppConstants.APP_SHARED_PREFERENCES,
                 Context.MODE_PRIVATE
-            ).getInt(AppConstants.LOGIN_SHARED_PREFERENCES, 0))
+            ).getInt(AppConstants.LOGIN_SHARED_PREFERENCES, 0)
+        )
 
-        viewModel.getUserById( requireContext().getSharedPreferences(
-            AppConstants.APP_SHARED_PREFERENCES,
-            Context.MODE_PRIVATE
-        ).getInt(AppConstants.LOGIN_SHARED_PREFERENCES, 0))
+        viewModel.getUserById(
+            requireContext().getSharedPreferences(
+                AppConstants.APP_SHARED_PREFERENCES,
+                Context.MODE_PRIVATE
+            ).getInt(AppConstants.LOGIN_SHARED_PREFERENCES, 0)
+        )
+
+        binding.tvExitHome.setOnClickListener { onExitClicked() }
     }
 
     private fun setListeners() {
@@ -60,5 +68,14 @@ class MyAccountFragment : Fragment() {
                 tvMyAccountPhoneNumber.text = it.contact
             }
         }
+    }
+
+    private fun onExitClicked() {
+        requireContext().getSharedPreferences(
+            AppConstants.APP_SHARED_PREFERENCES,
+            Context.MODE_PRIVATE
+        ).edit().clear().apply()
+        (activity as MainActivity).setNaviBarToInvisible()
+        findNavController().navigate(R.id.loginFragment)
     }
 }

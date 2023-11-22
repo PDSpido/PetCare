@@ -28,6 +28,10 @@ class MainActivity : FragmentActivity() {
         binding.bottomNavigation.visibility = View.VISIBLE
     }
 
+    fun setNaviBarToInvisible() {
+        binding.bottomNavigation.visibility = View.GONE
+    }
+
     private fun setNaviBarListener() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId) {

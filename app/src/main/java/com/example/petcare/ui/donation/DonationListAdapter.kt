@@ -1,8 +1,10 @@
 package com.example.petcare.ui.donation
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.petcare.data.entity.PostEntity
@@ -24,7 +26,19 @@ class DonationListAdapter(
                 donationItemValueDesired.text = "Desejado: ${item.valueDesired}"
                 Glide.with(binding.root).load(item.picture).into(binding.donationItemPicture)
                 donationItemButton.tag = item.uid
-                if (item.valueDonated < item.valueDesired) donationItemButton.setOnClickListener(onClickListener)
+                Log.i("pedro", "adapter ${item.uid}")
+
+
+                if (item.valueDonated < item.valueDesired) donationItemButton.setOnClickListener(
+                    onClickListener
+                )
+                else donationItemButton.setOnClickListener {
+                    Toast.makeText(
+                        binding.root.context,
+                        "Doação maxima alcançada",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
     }

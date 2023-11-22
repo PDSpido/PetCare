@@ -2,6 +2,7 @@ package com.example.petcare.ui.donation
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -38,6 +39,7 @@ class DonationViewModel : ViewModel() {
 
     fun addContribution(postId: Int, newValue: Float) {
         CoroutineScope(Dispatchers.IO).launch {
+            Log.i("pedro", "postId: $postId, newValue: $newValue")
             postRepository.addContribution(postId, newValue)
         }
     }

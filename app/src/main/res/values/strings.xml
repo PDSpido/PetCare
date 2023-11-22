@@ -2,8 +2,8 @@
     <string name="app_name">PetCare</string>
 
     <string-array name="post_type">
-        <item>Alert</item>
-        <item>Donation</item>
+        <item>Alerta</item>
+        <item>Doação</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

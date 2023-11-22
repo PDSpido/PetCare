@@ -1,6 +1,7 @@
 package com.example.petcare.ui.donation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,8 @@ class DonationConfirmationFragment : Fragment() {
                         if (this <= 0) {
                             showErrorToast()
                         } else {
+                            Log.i("pedro", "confirm $this")
+
                             viewModel.addContribution(
                                 arguments?.getInt(AppConstants.POST_ID_TO_CONFIRMATION)!!,
                                 this

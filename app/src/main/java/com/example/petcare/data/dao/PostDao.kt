@@ -15,7 +15,7 @@ interface PostDao {
     @Insert
     fun insert(post: PostEntity)
 
-    @Query("UPDATE ${AppConstants.POST_TABLE} SET valueDonated = :newValue + valueDonated WHERE postType = :postId")
+    @Query("UPDATE ${AppConstants.POST_TABLE} SET valueDonated = :newValue + valueDonated WHERE uid = :postId")
     fun addContribution(postId: Int, newValue: Float)
 
     @Query("SELECT * FROM ${AppConstants.POST_TABLE} WHERE postType = ${AppConstants.POST_TYPE_DONATION}")
