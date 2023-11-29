@@ -3,26 +3,18 @@ package com.example.petcare.util
 class AppConstants {
     companion object {
 
-        //Log
-        const val LOG_DATABASE = "PetCare-Database"
-
-        //Database
-        const val DATABASE_NAME = "PetCare"
-        const val USER_TABLE = "user"
-        const val POST_TABLE = "post"
-
         //Shared Preferences
         const val APP_SHARED_PREFERENCES = "AppSharedPreferences"
-        const val LOGIN_SHARED_PREFERENCES = "LoginSharedPreferences"
-        const val LOGIN_TYPE_SHARED_PREFERENCES = "LoginTypeSharedPreferences"
 
 
         //Parameter Passage
         const val POST_ID_TO_CONFIRMATION = "PostIdToConfirmation"
+        const val POST_VALUE_TO_CONFIRMATION = "PostValueToConfirmation"
+
 
         //Post type
-        const val POST_TYPE_FEED = 1
-        const val POST_TYPE_DONATION = 2
+        const val POST_TYPE_FEED = 0
+        const val POST_TYPE_DONATION = 1
 
         enum class RegisterErrors {
             ALREADY_EXIST, SUCCESS, UNKNOWN_FAILURE
@@ -30,10 +22,6 @@ class AppConstants {
 
         enum class UserType {
             COMMON, ONG
-        }
-
-        enum class ANIMAL_TYPE {
-            DOG, CAT, BIRD
         }
     }
 }

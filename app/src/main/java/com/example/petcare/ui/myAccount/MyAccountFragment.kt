@@ -13,6 +13,8 @@ import com.example.petcare.R
 import com.example.petcare.databinding.FragmentMyAccountBinding
 import com.example.petcare.ui.MainActivity
 import com.example.petcare.util.AppConstants
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MyAccountFragment : Fragment() {
 
@@ -25,7 +27,6 @@ class MyAccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentMyAccountBinding.inflate(layoutInflater)
-        viewModel.initRepositories(requireContext())
         return binding.root
     }
 
@@ -36,27 +37,23 @@ class MyAccountFragment : Fragment() {
 
         viewModel.postListData
 
-        viewModel.getAllPostsByUser(
-            requireContext().getSharedPreferences(
-                AppConstants.APP_SHARED_PREFERENCES,
-                Context.MODE_PRIVATE
-            ).getInt(AppConstants.LOGIN_SHARED_PREFERENCES, 0)
-        )
+        Firebase.auth.currentUser?.let {
+            viewModel.getAllPostsByUser(it.uid)
+            viewModel.getUserById(it.uid)
+        }
 
-        viewModel.getUserById(
-            requireContext().getSharedPreferences(
-                AppConstants.APP_SHARED_PREFERENCES,
-                Context.MODE_PRIVATE
-            ).getInt(AppConstants.LOGIN_SHARED_PREFERENCES, 0)
-        )
-
-        binding.tvExitHome.setOnClickListener { onExitClicked() }
+        binding.tvExitHome.setOnClickListener {
+            Firebase.auth.signOut()
+            onExitClicked()
+        }
     }
 
     private fun setListeners() {
         viewModel.postListData.observe(viewLifecycleOwner) {
             binding.rvMyAccountPostList.adapter =
                 MyAccountAdapter(it)
+            if (it.isEmpty()) binding.nothingToSeeMyAccount.nothingToSeeText.visibility = View.VISIBLE
+            else binding.nothingToSeeMyAccount.nothingToSeeText.visibility = View.GONE
         }
 
         viewModel.userData.observe(viewLifecycleOwner) {

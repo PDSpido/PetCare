@@ -22,7 +22,6 @@ class DonationListFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDonationListBinding.inflate(layoutInflater)
-        viewModel.initRepositories(requireContext())
         return binding.root
     }
 
@@ -38,12 +37,17 @@ class DonationListFragment : Fragment(), View.OnClickListener {
         viewModel.postListData.observe(viewLifecycleOwner) {
             binding.donationListRecyclerView.adapter =
                 DonationListAdapter(it, this)
+            if (it.isEmpty()) binding.nothingToSeeDonation.nothingToSeeText.visibility = View.VISIBLE
+            else binding.nothingToSeeDonation.nothingToSeeText.visibility = View.GONE
         }
     }
 
     override fun onClick(v: View) {
         findNavController().navigate(R.id.donationConfirmationFragment, Bundle().apply {
-            putInt(AppConstants.POST_ID_TO_CONFIRMATION, v.tag as Int)
+            with(v.tag as Pair<*, *>) {
+                putString(AppConstants.POST_ID_TO_CONFIRMATION, first as String)
+                putFloat(AppConstants.POST_VALUE_TO_CONFIRMATION, second as Float)
+            }
         })
     }
 

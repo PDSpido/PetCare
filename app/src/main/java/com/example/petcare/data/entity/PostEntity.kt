@@ -1,19 +1,13 @@
 package com.example.petcare.data.entity
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.example.petcare.util.AppConstants
-
-@Entity(tableName = AppConstants.POST_TABLE)
 data class PostEntity(
-    @PrimaryKey(autoGenerate = true) val uid: Int,
-    @ColumnInfo(name = "postType") val postType: Int,
-    @ColumnInfo(name = "userId") val userId: Int,
-    @ColumnInfo(name = "userType") val userType: Int,
-    @ColumnInfo(name = "valueDesired") val valueDesired: Float,
-    @ColumnInfo(name = "valueDonated") val valueDonated: Float,
-    @ColumnInfo(name = "tittle") val tittle: String,
-    @ColumnInfo(name = "description") val description: String,
-    @ColumnInfo(name = "picture") val picture: String,
+    val postUid: String?,
+    val postType: Long?,
+    val userId: String?,
+    val userType: Long?,
+    val valueDesired: Float?,
+    val valueDonated: Float?,
+    val title: String?,
+    val description: String?,
+    val picture: String?,
 )

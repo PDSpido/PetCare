@@ -45,5 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
+    <include
+        android:id="@+id/nothing_to_see_my_account"
+        layout="@layout/nothing_to_see"
+        android:visibility="visible"/>
 </LinearLayout>

@@ -32,10 +32,9 @@ class FeedAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(post: PostEntity) {
             with(binding) {
-                feedItemTittle.text = post.tittle
+                feedItemTittle.text = post.title
                 feedItemDescription.text = post.description
                 Glide.with(binding.root).load(post.picture).into(binding.feedItemPicture)
-
                 feedItemReport.setOnClickListener(onClickListener)
             }
         }

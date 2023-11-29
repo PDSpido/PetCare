@@ -1,6 +1,5 @@
 package com.example.petcare.ui.login
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.petcare.R
 import com.example.petcare.databinding.FragmentLoginBinding
 import com.example.petcare.ui.MainActivity
-import com.example.petcare.util.AppConstants
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class LoginFragment : Fragment() {
 
@@ -25,19 +25,13 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(layoutInflater)
-        viewModel.initRepositories(requireContext())
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (requireContext().getSharedPreferences(
-                AppConstants.APP_SHARED_PREFERENCES,
-                Context.MODE_PRIVATE
-            ).getInt(AppConstants.LOGIN_SHARED_PREFERENCES, 0) != 0
-        ) goToMain()
-
+        if (Firebase.auth.currentUser != null) goToMain()
 
         setListeners()
 
@@ -57,7 +51,6 @@ class LoginFragment : Fragment() {
 
     private fun setListeners() {
         viewModel.loginInfo.observe(viewLifecycleOwner) {
-
             if (it) goToMain()
             else Toast.makeText(requireContext(), "Falhou", Toast.LENGTH_LONG).show()
         }

@@ -1,25 +1,38 @@
 package com.example.petcare.data.repository
 
-import android.content.Context
-import com.example.petcare.data.PetCareDatabase
 import com.example.petcare.data.entity.PostEntity
-import kotlinx.coroutines.flow.Flow
+import com.example.petcare.util.FirebaseConstants
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.FirebaseDatabase
 
-class PostRepository(context: Context){
-    private val postDao = PetCareDatabase.getInstance(context).postDao()
+class PostRepository {
 
-    fun createPost(post: PostEntity) = postDao.insert(post = post)
+    fun registerPost(post: PostEntity) {
+        with(
+            FirebaseDatabase.getInstance().reference.child(FirebaseConstants.POST_REPO).push()
+        ) {
+            child(FirebaseConstants.POST_POST_TYPE).setValue(post.postType)
+            child(FirebaseConstants.POST_USER_ID).setValue(post.userId)
+            child(FirebaseConstants.POST_USER_TYPE).setValue(post.userType)
+            child(FirebaseConstants.POST_VALUE_DESIRED).setValue(post.valueDesired)
+            child(FirebaseConstants.POST_VALUE_DONATED).setValue(post.valueDonated)
+            child(FirebaseConstants.POST_TiTLE).setValue(post.title)
+            child(FirebaseConstants.POST_DESCRIPTION).setValue(post.description)
+            child(FirebaseConstants.POST_PICTURE).setValue(post.picture)
+        }
+    }
 
-    fun addContribution(postId: Int, newValue: Float) = postDao.addContribution(postId, newValue)
+    fun getAllPosts(valueEventListener: ChildEventListener) {
+        FirebaseDatabase.getInstance().reference.child(FirebaseConstants.POST_REPO)
+            .addChildEventListener(valueEventListener)
+    }
 
-    fun flowAll(): Flow<List<PostEntity>> = postDao.flowAll()
+    fun addContribution(postUid: String?, newValue: Float) {
+        with(postUid?.let { FirebaseDatabase.getInstance().reference.child(FirebaseConstants.POST_REPO)
+            .child(it).child(FirebaseConstants.POST_VALUE_DONATED) }) {
+            this?.setValue(newValue)
+        }
 
-    fun flowAllDonationPosts(): Flow<List<PostEntity>> = postDao.flowAllDonationPosts()
-
-    fun flowAllFeedPosts(): Flow<List<PostEntity>> = postDao.flowAllFeedPosts()
-
-    fun flowAllFeedPostsByText(text: String): Flow<List<PostEntity>> = postDao.flowAllFeedPostsByText(text)
-
-    fun flowPostsById(id: Int): Flow<List<PostEntity>> = postDao.flowPostsById(id)
+    }
 
 }

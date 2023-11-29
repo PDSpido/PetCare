@@ -1,6 +1,5 @@
 package com.example.petcare.ui.createPost
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +13,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.petcare.R
 import com.example.petcare.data.entity.PostEntity
+import com.example.petcare.data.repository.UserRepository
 import com.example.petcare.databinding.FragmentCreatePostBinding
-import com.example.petcare.util.AppConstants
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class CreatePostFragment : Fragment() {
 
@@ -30,7 +31,6 @@ class CreatePostFragment : Fragment() {
     ): View {
         binding = FragmentCreatePostBinding.inflate(layoutInflater)
         binding.createPostType.onItemSelectedListener = SpinnerListener()
-        viewModel.initRepositories(requireContext())
         return binding.root
     }
 
@@ -43,19 +43,13 @@ class CreatePostFragment : Fragment() {
                 if (verifyFields()) {
                     viewModel.createPost(
                         PostEntity(
-                            uid = 0,
-                            postType = getPostType(createPostType.selectedView as TextView),
+                            postUid = "",
+                            postType = getPostType(createPostType.selectedView as TextView).toLong(),
                             picture = "https://www.mobly.com.br/blog/wp-content/uploads/2019/10/lar-pet-friendly-4.jpg",
-                            userId = requireContext().getSharedPreferences(
-                                AppConstants.APP_SHARED_PREFERENCES,
-                                Context.MODE_PRIVATE
-                            ).getInt(AppConstants.LOGIN_SHARED_PREFERENCES, 0),
-                            userType = requireContext().getSharedPreferences(
-                                AppConstants.APP_SHARED_PREFERENCES,
-                                Context.MODE_PRIVATE
-                            ).getInt(AppConstants.LOGIN_TYPE_SHARED_PREFERENCES, 0),
+                            userId = Firebase.auth.currentUser?.uid,
+                            userType = UserRepository().getUserType(Firebase.auth.currentUser?.uid),
                             description = createPostDescriptionInput.text.toString(),
-                            tittle = createPostTittleInput.text.toString(),
+                            title = createPostTittleInput.text.toString(),
                             valueDesired = if (createPostAmountInput.text.toString().isEmpty()) 0f
                             else createPostAmountInput.text.toString().toFloat(),
                             valueDonated = 0f
@@ -136,8 +130,8 @@ class CreatePostFragment : Fragment() {
 
     private fun getPostType(v: TextView): Int =
         when (v.text) {
-            "Alerta" -> 1
-            "Doação" -> 2
+            "Alerta" -> 0
+            "Doação" -> 1
             else -> 0
         }
 

@@ -19,14 +19,14 @@ class DonationListAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: PostEntity) {
             with(binding) {
-                donationItemTittle.text = item.tittle
+                donationItemTittle.text = item.title
                 donationItemDescription.text = item.description
                 donationItemValueDonated.text = "Doado: ${item.valueDonated}"
                 donationItemValueDesired.text = "Desejado: ${item.valueDesired}"
                 Glide.with(binding.root).load(item.picture).into(binding.donationItemPicture)
-                donationItemButton.tag = item.uid
+                donationItemButton.tag = Pair(item.postUid, item.valueDonated)
 
-                if (item.valueDonated < item.valueDesired) donationItemButton.setOnClickListener(
+                if (item.valueDonated!! < item.valueDesired!!) donationItemButton.setOnClickListener(
                     onClickListener
                 )
                 else donationItemButton.setOnClickListener {

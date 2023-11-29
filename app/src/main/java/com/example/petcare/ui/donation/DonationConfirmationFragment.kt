@@ -24,7 +24,6 @@ class DonationConfirmationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDonationConfirmationBinding.inflate(layoutInflater)
-        viewModel.initRepositories(requireContext())
         return binding.root
     }
 
@@ -41,10 +40,10 @@ class DonationConfirmationFragment : Fragment() {
                             showErrorToast()
                         } else {
                             Log.i("pedro", "confirm $this")
-
                             viewModel.addContribution(
-                                arguments?.getInt(AppConstants.POST_ID_TO_CONFIRMATION)!!,
-                                this
+                                arguments?.getString(AppConstants.POST_ID_TO_CONFIRMATION)!!,
+                                arguments?.getFloat(AppConstants.POST_VALUE_TO_CONFIRMATION)!! + this
+
                             )
                             findNavController().navigate(R.id.donationListFragment)
                         }

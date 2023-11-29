@@ -26,7 +26,6 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRegisterBinding.inflate(layoutInflater)
-        viewModel.initRepositories(requireContext())
         return binding.root
     }
 
@@ -42,14 +41,13 @@ class RegisterFragment : Fragment() {
                 if (verifyFields()) {
                     viewModel.registerUser(
                         UserEntity(
-                            uid = 0,
                             username = registerNameInput.text.toString(),
                             document = registerDocumentInput.text.toString(),
                             email = registerEmailInput.text.toString(),
                             contact = registerPhoneInput.text.toString(),
                             password = registerPasswordInput.text.toString(),
-                            userType = if (swRegisterOng.isChecked) AppConstants.Companion.UserType.ONG.ordinal
-                            else AppConstants.Companion.UserType.COMMON.ordinal
+                            userType = if (swRegisterOng.isChecked) AppConstants.Companion.UserType.ONG.ordinal.toLong()
+                            else AppConstants.Companion.UserType.COMMON.ordinal.toLong()
                         )
                     )
                 }
@@ -66,7 +64,7 @@ class RegisterFragment : Fragment() {
                 AppConstants.Companion.RegisterErrors.ALREADY_EXIST.ordinal ->
                     Toast.makeText(
                         requireContext(),
-                        "Usuario com esse email ja existe",
+                        "Occoreu algum problema durante a criação da conta, verifique seus dados novamente",
                         Toast.LENGTH_SHORT
                     ).show()
             }
