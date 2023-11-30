@@ -13,10 +13,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.petcare.R
 import com.example.petcare.data.entity.PostEntity
-import com.example.petcare.data.repository.UserRepository
 import com.example.petcare.databinding.FragmentCreatePostBinding
+import com.example.petcare.util.FirebaseConstants
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.getValue
 import com.google.firebase.ktx.Firebase
 
 class CreatePostFragment : Fragment() {
@@ -25,12 +27,20 @@ class CreatePostFragment : Fragment() {
 
     private lateinit var binding: FragmentCreatePostBinding
 
+    private var userType: Long? = 0L
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCreatePostBinding.inflate(layoutInflater)
         binding.createPostType.onItemSelectedListener = SpinnerListener()
+        Firebase.auth.currentUser?.uid?.let {
+            FirebaseDatabase.getInstance().reference.child(FirebaseConstants.USER_REPO).child(it)
+                .child(FirebaseConstants.USER_USERTYPE).get()
+                .addOnSuccessListener { result -> userType = result.getValue<Long>() }
+        }
+
         return binding.root
     }
 
@@ -47,7 +57,7 @@ class CreatePostFragment : Fragment() {
                             postType = getPostType(createPostType.selectedView as TextView).toLong(),
                             picture = "https://www.mobly.com.br/blog/wp-content/uploads/2019/10/lar-pet-friendly-4.jpg",
                             userId = Firebase.auth.currentUser?.uid,
-                            userType = UserRepository().getUserType(Firebase.auth.currentUser?.uid),
+                            userType = userType,
                             description = createPostDescriptionInput.text.toString(),
                             title = createPostTittleInput.text.toString(),
                             valueDesired = if (createPostAmountInput.text.toString().isEmpty()) 0f
